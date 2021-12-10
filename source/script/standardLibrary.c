@@ -478,6 +478,15 @@ ClassFunction(stdHwType){
 	return newIntVariablePtr(fuse_read_hw_type());
 }
 
+ClassFunction(stdIsErista){
+	return newIntVariablePtr(is_erista());
+}
+
+ClassFunction(stdRebootNormal){
+	power_set_state(POWER_OFF_REBOOT);
+	return &emptyClass;
+}
+
 #else
 #define STUBBED(name) ClassFunction(name) { return newIntVariablePtr(0); }
 
@@ -514,6 +523,7 @@ STUBBED(stdEmummcFileWrite)
 STUBBED(stdEscPaths)
 STUBBED(stdGetCwd)
 STUBBED(stdPower)
+STUBBED(stdRebootNormal)
 STUBBED(stdSetPrintPos)
 STUBBED(stdSetPixels)
 STUBBED(stdIsPatched)
@@ -566,6 +576,7 @@ ClassFunctionTableEntry_t standardFunctionDefenitions[] = {
 	{"emummcwrite", stdEmummcFileWrite, 2, twoStringArgStd},
 	{"fuse_patched", stdIsPatched, 0, 0},
 	{"fuse_hwtype", stdHwType, 0, 0},
+	{"is_erista", stdIsErista, 0, 0},
 
 	// FileSystem
 	// 	Dir
@@ -584,6 +595,7 @@ ClassFunctionTableEntry_t standardFunctionDefenitions[] = {
 	// 	Utils
 	{"fsexists", stdFileExists, 1, twoStringArgStd},
 	{"payload", stdLaunchPayload, 1, twoStringArgStd},
+	{"reboot_ofw", stdRebootNormal, 0, 0},
 	{"combinepath", stdCombinePaths, VARARGCOUNT, 0},
 	{"escapepath", stdEscPaths, 1, twoStringArgStd},
 };

@@ -128,6 +128,13 @@ u32 fuse_read_hw_type()
 	return FUSE_NX_HW_TYPE_ICOSA;
 }
 
+bool is_erista() {
+	if (fuse_read_hw_type() == FUSE_NX_HW_TYPE_ICOSA)
+		return HW_ERISTA;
+	return HW_MARIKO;
+}
+
+
 int fuse_set_sbk()
 {
 	// Skip SBK/SSK if sept was run.
